@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://dpwl5uotl0nbt"]
 
 [ext_resource type="Script" uid="uid://d2jq1q3ejvdet" path="res://scenes/character_body_2d.gd" id="1_5404m"]
-[ext_resource type="Texture2D" uid="uid://bgpt067hogij0" path="res://CruS Models (+Textures) pack ballsfish edition/Maps/textures/apartment/grandma2.png" id="1_otw8i"]
+[ext_resource type="Texture2D" uid="uid://bec7tutbqwwt" path="res://CruS Models (+Textures) pack ballsfish edition/Maps/textures/apartment/grandma2.png" id="1_otw8i"]
 [ext_resource type="Script" uid="uid://b3a4ns74i1iam" path="res://scenes/area_2d.gd" id="3_8vpx7"]
-[ext_resource type="Texture2D" uid="uid://ke1jw2hpm3nn" path="res://CruS Models (+Textures) pack ballsfish edition/Maps/textures/base/greyface.png" id="3_p03pk"]
+[ext_resource type="Texture2D" uid="uid://bwx2ja60t0055" path="res://CruS Models (+Textures) pack ballsfish edition/Maps/textures/base/greyface.png" id="3_p03pk"]
 [ext_resource type="PackedScene" uid="uid://cot52ykaogej0" path="res://scenes/spawn.tscn" id="4_8kpiw"]
-[ext_resource type="Texture2D" uid="uid://c66lupdegs7i4" path="res://CruS Models (+Textures) pack ballsfish edition/Maps/textures/base/Granite1.png" id="5_otw8i"]
+[ext_resource type="Texture2D" uid="uid://xb51maqddi5k" path="res://CruS Models (+Textures) pack ballsfish edition/Maps/textures/base/Granite1.png" id="5_otw8i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8kpiw"]
 size = Vector2(19, 20)
@@ -45,6 +45,8 @@ texture = ExtResource("3_p03pk")
 shape = SubResource("RectangleShape2D_8kpiw")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+
+[node name="Timer" type="Timer" parent="CharacterBody2D/AudioStreamPlayer2D"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(156, 103)
