@@ -1,21 +1,36 @@
 extends CharacterBody2D
 
+var GRAVITY_FLIP = false
+var GRAVITY = -2
+
 func _physics_process(delta):
 	var direction = Vector2.ZERO
-	var SPEED = 100
+	var SPEED = 200
 	#Gravity
-	velocity.y += 2
-	
-	if Input.is_action_just_pressed("Up") && is_on_floor():
-		velocity.y = -1 * SPEED
-	elif Input.is_action_pressed("Left"):
-		velocity.x = -1 * SPEED
-	elif Input.is_action_pressed("Right"):
-		velocity.x = 1 * SPEED
-	elif Input.is_action_pressed("Down") && is_on_floor():
-		velocity.y = 1 * SPEED
+	if GRAVITY_FLIP:
+		velocity.y += GRAVITY
 	else:
-			velocity.x = 0
+		velocity.y += -GRAVITY
+	
+	if Input.is_action_just_pressed("Up"):
+		GRAVITY_FLIP = true
+		velocity.y = -1 * SPEED
+	if Input.is_action_pressed("Left"):
+		velocity.x = -1 * SPEED
+		$Sprite2D.flip_h = true
+	if Input.is_action_pressed("Right"):
+		velocity.x = 1 * SPEED
+		$Sprite2D.flip_h = false
+	if Input.is_action_just_pressed("Down"):
+		GRAVITY_FLIP = false
+		velocity.y = 1 * SPEED
+	if !(Input.is_action_pressed("Left") || Input.is_action_pressed("Right")):
+		velocity.x = 0
+		
+	if velocity.y >= 0:
+		$Sprite2D.flip_v = false
+	else: 
+		$Sprite2D.flip_v = true
 	
 	if !(0 <= position.x && position.x <= 1152):
 		position.x = get_parent().get_node("Spawn").position.x

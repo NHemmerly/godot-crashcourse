@@ -1,17 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpwl5uotl0nbt"]
+[gd_scene load_steps=10 format=3 uid="uid://dpwl5uotl0nbt"]
 
 [ext_resource type="Script" uid="uid://d2jq1q3ejvdet" path="res://scenes/character_body_2d.gd" id="1_5404m"]
-[ext_resource type="Texture2D" uid="uid://bgpt067hogij0" path="res://CruS Models (+Textures) pack ballsfish edition/Maps/textures/apartment/grandma2.png" id="1_otw8i"]
+[ext_resource type="Texture2D" uid="uid://dt6e6flp1u3vf" path="res://CruS Models (+Textures) pack ballsfish edition/Maps/textures/apartment/grandma2.png" id="1_otw8i"]
 [ext_resource type="Script" uid="uid://b3a4ns74i1iam" path="res://scenes/area_2d.gd" id="3_8vpx7"]
-[ext_resource type="Texture2D" uid="uid://ke1jw2hpm3nn" path="res://CruS Models (+Textures) pack ballsfish edition/Maps/textures/base/greyface.png" id="3_p03pk"]
-[ext_resource type="PackedScene" uid="uid://cot52ykaogej0" path="res://scenes/spawn.tscn" id="4_8kpiw"]
-[ext_resource type="Texture2D" uid="uid://c66lupdegs7i4" path="res://CruS Models (+Textures) pack ballsfish edition/Maps/textures/base/Granite1.png" id="5_otw8i"]
+[ext_resource type="Texture2D" uid="uid://sta4hirl2n1" path="res://CruS Models (+Textures) pack ballsfish edition/Maps/textures/base/greyface.png" id="3_p03pk"]
+[ext_resource type="PackedScene" path="res://scenes/spawn.tscn" id="4_8kpiw"]
+[ext_resource type="Texture2D" uid="uid://dxw3yu0bx62r3" path="res://CruS Models (+Textures) pack ballsfish edition/Maps/textures/base/Granite1.png" id="5_otw8i"]
+[ext_resource type="Texture2D" uid="uid://dg3lu3ib4nlal" path="res://CruS Models (+Textures) pack ballsfish edition/Maps/textures/base/airduct.png" id="7_2l105"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8kpiw"]
 size = Vector2(19, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p03pk"]
-size = Vector2(100, 20)
+size = Vector2(108.831, 30.6464)
 
 [node name="somethingstupid" type="Node2D"]
 
@@ -29,7 +30,8 @@ position = Vector2(159, 91)
 metadata/_edit_lock_ = true
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(175, 126)
+position = Vector2(81, 207)
+scale = Vector2(5.1717, 5.1717)
 script = ExtResource("1_5404m")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
@@ -41,14 +43,24 @@ texture = ExtResource("3_p03pk")
 shape = SubResource("RectangleShape2D_8kpiw")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(156, 103)
+position = Vector2(132, 112)
 script = ExtResource("3_8vpx7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(2, 50)
+position = Vector2(94.5, 227.5)
+scale = Vector2(4.14405, 4.14405)
 shape = SubResource("RectangleShape2D_p03pk")
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(2, 50)
-scale = Vector2(0.78125, 0.15625)
+position = Vector2(158.64, 226)
+scale = Vector2(2.52125, 1)
 texture = ExtResource("5_otw8i")
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="StaticBody2D"]
+offset_left = -131.0
+offset_top = 163.0
+offset_right = -3.0
+offset_bottom = 291.0
+texture = ExtResource("7_2l105")
