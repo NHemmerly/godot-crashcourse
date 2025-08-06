@@ -11,27 +11,32 @@ var was_in_air = !is_on_floor()
 #Used to play through the audio instead of repeating the beginning
 var stop_time = 0
 
+#restarts the 
+func _on_timer_timeout() -> void:
+	stop_time = 0
+
 #func fade_out(stream_player):
 #	stream_player.volume
 
 func moving_sound(move_sound):
 	
 	$AudioStreamPlayer2D/Timer.wait_time = move_sound.get_length()
-	if stop_time >= move_sound.get_length():
-		stop_time = 0
 	
 	if is_on_floor() && velocity.x != 0:
 		if !$AudioStreamPlayer2D.is_playing():
 			$AudioStreamPlayer2D.stream = move_sound
-			$AudioStreamPlayer2D.play(2)
+			if stop_time >= move_sound.get_length():
+				stop_time = 0
+			else:
+				$AudioStreamPlayer2D.play(stop_time)
 			$AudioStreamPlayer2D/Timer.start()
 	elif $AudioStreamPlayer2D.is_playing():
 		$AudioStreamPlayer2D.stop()
+		$AudioStreamPlayer2D/Timer.stop()
 		stop_time = move_sound.get_length() - $AudioStreamPlayer2D/Timer.time_left
-		print(stop_time)
+		if stop_time >= move_sound.get_length():
+			stop_time = 0
 
-		
-		
 	#Land sounds
 	#if is_on_floor() && was_in_air:
 		#$AudioStreamPlayer2D.play(0.3)
