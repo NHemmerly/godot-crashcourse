@@ -8,11 +8,12 @@ var tween = create_tween()
 #Used to detect when the character lands
 var was_in_air = !is_on_floor()
 
-#Used to play through the audio instead of repeating the beginning
+#Stores playback time whenever the audio is stopped
 var stop_time = 0
 
-#restarts the 
+#Called whenever stop_time >= the length of the audio 
 func _on_timer_timeout() -> void:
+	print("Timeout")
 	stop_time = 0
 
 #func fade_out(stream_player):
@@ -25,14 +26,14 @@ func moving_sound(move_sound):
 	if is_on_floor() && velocity.x != 0:
 		if !$AudioStreamPlayer2D.is_playing():
 			$AudioStreamPlayer2D.stream = move_sound
-			if stop_time >= move_sound.get_length():
-				stop_time = 0
+			$AudioStreamPlayer2D.play(stop_time)
+			if $AudioStreamPlayer2D/Timer.paused:
+				$AudioStreamPlayer2D/Timer.paused = false
 			else:
-				$AudioStreamPlayer2D.play(stop_time)
-			$AudioStreamPlayer2D/Timer.start()
+				$AudioStreamPlayer2D/Timer.start()
 	elif $AudioStreamPlayer2D.is_playing():
 		$AudioStreamPlayer2D.stop()
-		$AudioStreamPlayer2D/Timer.stop()
+		$AudioStreamPlayer2D/Timer.paused = true
 		stop_time = move_sound.get_length() - $AudioStreamPlayer2D/Timer.time_left
 		if stop_time >= move_sound.get_length():
 			stop_time = 0
