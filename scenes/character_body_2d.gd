@@ -47,31 +47,25 @@ func _physics_process(delta):
 	#Gravity
 	velocity.y += 2
 	
-	if Input.is_action_just_pressed("Up"):
-		GRAVITY_FLIP = true
+	if Input.is_action_just_pressed("Up") && is_on_floor():
 		velocity.y = -1 * SPEED
 	if Input.is_action_pressed("Left"):
 		velocity.x = -1 * SPEED
 		$Sprite2D.flip_h = true
-	elif Input.is_action_pressed("Right"):
+	if Input.is_action_pressed("Right"):
 		velocity.x = 1 * SPEED
 		$Sprite2D.flip_h = false
-	elif Input.is_action_pressed("Down") && is_on_floor():
+	if Input.is_action_pressed("Down") && is_on_floor():
 		velocity.y = 1 * SPEED
-	if !(Input.is_action_pressed("Left") || Input.is_action_pressed("Right")):
-		velocity.x = 0
-		
-	if velocity.y >= 0:
-		$Sprite2D.flip_v = false
-	else: 
-		$Sprite2D.flip_v = true
+	if !(Input.is_action_pressed("Right") || Input.is_action_pressed("Left")):
+			velocity.x = 0
 	
-	if !(0 <= position.x && position.x <= 1152):
-		position.x = get_parent().get_node("Spawn").position.x
-		position.y = get_parent().get_node("Spawn").position.y
-	if !(0 <= position.y && position.y <= 648):
-		position.x = get_parent().get_node("Spawn").position.x
-		position.y = get_parent().get_node("Spawn").position.y
+	#if !(0 <= position.x && position.x <= 1152):
+	#	position.x = get_parent().get_node("Spawn").position.x
+	#	position.y = get_parent().get_node("Spawn").position.y
+	#if !(0 <= position.y && position.y <= 648):
+	#	position.x = get_parent().get_node("Spawn").position.x
+	#	position.y = get_parent().get_node("Spawn").position.y
 	
 	moving_sound(SCRAPE_SOUND)
 	move_and_slide()
