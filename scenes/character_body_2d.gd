@@ -47,19 +47,43 @@ func _physics_process(delta):
 	#Gravity
 	velocity.y += 2
 	
+	#Movement
 	if Input.is_action_just_pressed("Up") && is_on_floor():
 		velocity.y = -1 * SPEED
-	elif Input.is_action_pressed("Left"):
+	if Input.is_action_pressed("Left"):
 		velocity.x = -1 * SPEED
-		$Sprite2D.flip_h = true
-	elif Input.is_action_pressed("Right"):
+		$Conk.flip_h = true
+	if Input.is_action_pressed("Right"):
 		velocity.x = 1 * SPEED
-		$Sprite2D.flip_h = false
-	elif Input.is_action_pressed("Down") && is_on_floor():
+		$Conk.flip_h = false
+	if Input.is_action_pressed("Down") && is_on_floor():
 		velocity.y = 1 * SPEED
-	else:
+	if !(Input.is_action_pressed("Right") || Input.is_action_pressed("Left")):
 			velocity.x = 0
 	
+	
+	
+	#Rotation
+	print($Conk.rotation_degrees)
+	
+	if is_on_floor():
+		if fmod($Conk.rotation_degrees, 90) < 2.0 && fmod($Conk.rotation_degrees, 90) > -2.0 && $Conk.rotation != 0:
+			print($Conk.rotation_degrees)
+			$Conk.rotation_degrees -= fmod($Conk.rotation_degrees, 90)
+			$CollisionShape2D.rotation_degrees -= fmod($CollisionShape2D.rotation_degrees, 90)
+		if fmod($Conk.rotation_degrees, 90) < 0:
+			$Conk.rotation_degrees += 2
+			$CollisionShape2D.rotation_degrees += 2
+		elif fmod($Conk.rotation_degrees, 90) > 0:
+			$Conk.rotation_degrees -= 2
+			$CollisionShape2D.rotation_degrees -= 2
+	else:
+		#$Conk.rotation_degrees += (velocity.y / 100)
+		#$CollisionShape2D.rotation_degrees += (velocity.y / 100)
+		$Conk.rotation_degrees += (velocity.x / 100)
+		$CollisionShape2D.rotation_degrees += (velocity.x / 100)
+	
+	#Spawn lock
 	if !(0 <= position.x && position.x <= 1152):
 		position.x = get_parent().get_node("Spawn").position.x
 		position.y = get_parent().get_node("Spawn").position.y
