@@ -64,24 +64,27 @@ func _physics_process(delta):
 	
 	
 	#Rotation
-	print($Conk.rotation_degrees)
+	print(rotation_degrees)
 	
 	if is_on_floor():
-		if fmod($Conk.rotation_degrees, 90) < 2.0 && fmod($Conk.rotation_degrees, 90) > -2.0 && $Conk.rotation != 0:
-			print($Conk.rotation_degrees)
-			$Conk.rotation_degrees -= fmod($Conk.rotation_degrees, 90)
-			$CollisionShape2D.rotation_degrees -= fmod($CollisionShape2D.rotation_degrees, 90)
-		if fmod($Conk.rotation_degrees, 90) < 0:
-			$Conk.rotation_degrees += 2
-			$CollisionShape2D.rotation_degrees += 2
-		elif fmod($Conk.rotation_degrees, 90) > 0:
-			$Conk.rotation_degrees -= 2
-			$CollisionShape2D.rotation_degrees -= 2
+		if (fmod(rotation_degrees, 90) < 2.0 && fmod(rotation_degrees, 90) > -2.0) && rotation != 0:
+			if fmod(rotation_degrees, 90) > 0:
+				rotation_degrees -= fmod(rotation_degrees, 90)
+			elif fmod(rotation_degrees, 90) < 0:
+				rotation_degrees += fmod(rotation_degrees, 90)
+			#$Conk.rotation_degrees = 0
+			#$CollisionShape2D.rotation_degrees = 0
+			pass
+		elif fmod(rotation_degrees, 90) < 0 && fmod(rotation, 90) != 0:
+			rotation_degrees -= 2
+			#$CollisionShape2D.rotation_degrees += 2
+		elif fmod(rotation_degrees, 90) > 1 && fmod(rotation, 90) != 0:
+			rotation_degrees += 2
+			#$CollisionShape2D.rotation_degrees -= 2
 	else:
 		#$Conk.rotation_degrees += (velocity.y / 100)
 		#$CollisionShape2D.rotation_degrees += (velocity.y / 100)
-		$Conk.rotation_degrees += (velocity.x / 100)
-		$CollisionShape2D.rotation_degrees += (velocity.x / 100)
+		rotation_degrees += (velocity.x / 100)
 	
 	#Spawn lock
 	if !(0 <= position.x && position.x <= 1152):
