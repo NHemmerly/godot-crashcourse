@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 var SCRAPE_SOUND = preload("res://scrape.mp3")
 var direction = Vector2.ZERO
-var tween = create_tween()
+#var tween = create_tween()
 
 #Used to detect when the character lands
 var was_in_air = !is_on_floor()
@@ -79,16 +79,16 @@ func _physics_process(_delta):
 	
 	#Rotation	
 	if is_on_floor():
-		#print(fmod(rotation_degrees, 90))
-		#if abs(fmod(rotation_degrees, 90)) < 90 && rotation != 0:
-			#rotation_degrees -= (rotation_degrees-fmod(rotation_degrees, 90))
-		#elif abs(fmod(rotation_degrees, 90)) > 90:
-			#rotation_degrees += (rotation_degrees-fmod(rotation_degrees, 90))
-		#if fmod(rotation_degrees, 90) < 45 && fmod(rotation, 90) != 0:
-			#rotation_degrees -= 2
-		#elif fmod(rotation_degrees, 90) > 45 && fmod(rotation, 90) != 0:
-			#rotation_degrees += 2
-	#else:
+		print(fmod(rotation_degrees, 90))
+		if abs(fmod(rotation_degrees, 90)) < 90 && rotation != 0:
+			rotation_degrees -= (rotation_degrees-fmod(rotation_degrees, 90))
+		elif abs(fmod(rotation_degrees, 90)) > 90:
+			rotation_degrees += (rotation_degrees-fmod(rotation_degrees, 90))
+		if fmod(rotation_degrees, 90) < 45 && fmod(rotation, 90) != 0:
+			rotation_degrees -= 2
+		elif fmod(rotation_degrees, 90) > 45 && fmod(rotation, 90) != 0:
+			rotation_degrees += 2
+	else:
 		rotation_degrees += (velocity.x / 100)
 	
 	#Spawn lock

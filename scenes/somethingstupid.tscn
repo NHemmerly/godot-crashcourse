@@ -8,7 +8,7 @@
 [sub_resource type="GDScript" id="GDScript_ba0x2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p03pk"]
-size = Vector2(539, 128)
+size = Vector2(575, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_otw8i"]
 size = Vector2(640, 128)
@@ -44,7 +44,7 @@ texture = ExtResource("5_otw8i")
 stretch_mode = 1
 
 [node name="Platform1_Collision" type="CollisionShape2D" parent="Platform1"]
-position = Vector2(22.5, 481)
+position = Vector2(4.5, 481)
 shape = SubResource("RectangleShape2D_p03pk")
 metadata/_edit_group_ = true
 
