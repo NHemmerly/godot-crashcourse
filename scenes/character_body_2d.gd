@@ -15,7 +15,6 @@ var stop_time = 0
 
 #Called whenever stop_time >= the length of the audio 
 func _on_timer_timeout() -> void:
-	print("Timeout")
 	stop_time = 0
 
 #func fade_out(stream_player):
@@ -49,6 +48,7 @@ func _physics_process(_delta):
 	#Gravity
 	velocity.y += GRAVITY
 	
+	#Movement
 	if Input.is_action_just_pressed("Up") && is_on_floor():
 		velocity.y = -1 * SPEED
 	if Input.is_action_pressed("Left"):
@@ -68,6 +68,36 @@ func _physics_process(_delta):
 	#if !(0 <= position.y && position.y <= 648):
 	#	position.x = get_parent().get_node("Spawn").position.x
 	#	position.y = get_parent().get_node("Spawn").position.y
+		$Conk.flip_h = true
+	if Input.is_action_pressed("Right"):
+		velocity.x = 1 * SPEED
+		$Conk.flip_h = false
+	if Input.is_action_pressed("Down") && is_on_floor():
+		velocity.y = 1 * SPEED
+	if !(Input.is_action_pressed("Right") || Input.is_action_pressed("Left")):
+		velocity.x = 0
+	
+	#Rotation	
+	if is_on_floor():
+		#print(fmod(rotation_degrees, 90))
+		#if abs(fmod(rotation_degrees, 90)) < 90 && rotation != 0:
+			#rotation_degrees -= (rotation_degrees-fmod(rotation_degrees, 90))
+		#elif abs(fmod(rotation_degrees, 90)) > 90:
+			#rotation_degrees += (rotation_degrees-fmod(rotation_degrees, 90))
+		#if fmod(rotation_degrees, 90) < 45 && fmod(rotation, 90) != 0:
+			#rotation_degrees -= 2
+		#elif fmod(rotation_degrees, 90) > 45 && fmod(rotation, 90) != 0:
+			#rotation_degrees += 2
+	#else:
+		rotation_degrees += (velocity.x / 100)
+	
+	#Spawn lock
+	if !(0 <= position.x && position.x <= 1152):
+		position.x = get_parent().get_node("Spawn").position.x
+		position.y = get_parent().get_node("Spawn").position.y
+	if !(0 <= position.y && position.y <= 648):
+		position.x = get_parent().get_node("Spawn").position.x
+		position.y = get_parent().get_node("Spawn").position.y
 	
 	moving_sound(SCRAPE_SOUND)
 	move_and_slide()
