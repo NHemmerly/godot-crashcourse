@@ -16,7 +16,7 @@ script = ExtResource("1_mprh3")
 GRAVITY = 6
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="TextureRect" parent="CharacterBody2D"]
+[node name="Conk" type="TextureRect" parent="CharacterBody2D"]
 offset_left = -10.0
 offset_top = -10.0
 offset_right = 118.0

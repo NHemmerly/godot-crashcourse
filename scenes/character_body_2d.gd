@@ -53,14 +53,14 @@ func _physics_process(_delta):
 		velocity.y = -1 * SPEED
 	if Input.is_action_pressed("Left"):
 		velocity.x = -1 * SPEED
-		$Sprite2D.flip_h = true
+		$Conk.flip_h = true
 	if Input.is_action_pressed("Right"):
 		velocity.x = 1 * SPEED
-		$Sprite2D.flip_h = false
+		$Conk.flip_h = false
 	if Input.is_action_pressed("Down") && is_on_floor():
 		velocity.y = 1 * SPEED
 	if !(Input.is_action_pressed("Right") || Input.is_action_pressed("Left")):
-			velocity.x = 0
+		velocity.x = 0
 	
 	#if !(0 <= position.x && position.x <= 1152):
 	#	position.x = get_parent().get_node("Spawn").position.x
@@ -92,12 +92,12 @@ func _physics_process(_delta):
 		rotation_degrees += (velocity.x / 100)
 	
 	#Spawn lock
-	if !(0 <= position.x && position.x <= 1152):
-		position.x = get_parent().get_node("Spawn").position.x
-		position.y = get_parent().get_node("Spawn").position.y
-	if !(0 <= position.y && position.y <= 648):
-		position.x = get_parent().get_node("Spawn").position.x
-		position.y = get_parent().get_node("Spawn").position.y
+	#if !(0 <= position.x && position.x <= 1152):
+	#	position.x = get_parent().get_node("Spawn").position.x
+	#	position.y = get_parent().get_node("Spawn").position.y
+	#if !(0 <= position.y && position.y <= 648):
+	#	position.x = get_parent().get_node("Spawn").position.x
+	#	position.y = get_parent().get_node("Spawn").position.y
 	
 	moving_sound(SCRAPE_SOUND)
 	move_and_slide()
