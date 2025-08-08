@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
-var direction = Vector2.ZERO
-var SPEED = 100
+@export var SPEED = 200
+@export var GRAVITY = 4
+
 var SCRAPE_SOUND = preload("res://scrape.mp3")
+var direction = Vector2.ZERO
 var tween = create_tween()
 
 #Used to detect when the character lands
@@ -41,16 +43,31 @@ func moving_sound(move_sound):
 	#if is_on_floor() && was_in_air:
 		#$AudioStreamPlayer2D.play(0.3)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	#Gravity
-	velocity.y += 2
+	velocity.y += GRAVITY
 	
 	#Movement
 	if Input.is_action_just_pressed("Up") && is_on_floor():
 		velocity.y = -1 * SPEED
 	if Input.is_action_pressed("Left"):
 		velocity.x = -1 * SPEED
+		$Sprite2D.flip_h = true
+	if Input.is_action_pressed("Right"):
+		velocity.x = 1 * SPEED
+		$Sprite2D.flip_h = false
+	if Input.is_action_pressed("Down") && is_on_floor():
+		velocity.y = 1 * SPEED
+	if !(Input.is_action_pressed("Right") || Input.is_action_pressed("Left")):
+			velocity.x = 0
+	
+	#if !(0 <= position.x && position.x <= 1152):
+	#	position.x = get_parent().get_node("Spawn").position.x
+	#	position.y = get_parent().get_node("Spawn").position.y
+	#if !(0 <= position.y && position.y <= 648):
+	#	position.x = get_parent().get_node("Spawn").position.x
+	#	position.y = get_parent().get_node("Spawn").position.y
 		$Conk.flip_h = true
 	if Input.is_action_pressed("Right"):
 		velocity.x = 1 * SPEED
