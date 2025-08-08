@@ -13,7 +13,6 @@ var stop_time = 0
 
 #Called whenever stop_time >= the length of the audio 
 func _on_timer_timeout() -> void:
-	print("Timeout")
 	stop_time = 0
 
 #func fade_out(stream_player):
@@ -59,31 +58,20 @@ func _physics_process(delta):
 	if Input.is_action_pressed("Down") && is_on_floor():
 		velocity.y = 1 * SPEED
 	if !(Input.is_action_pressed("Right") || Input.is_action_pressed("Left")):
-			velocity.x = 0
+		velocity.x = 0
 	
-	
-	
-	#Rotation
-	print(rotation_degrees)
-	
+	#Rotation	
 	if is_on_floor():
-		if (fmod(rotation_degrees, 90) < 2.0 && fmod(rotation_degrees, 90) > -2.0) && rotation != 0:
-			if fmod(rotation_degrees, 90) > 0:
-				rotation_degrees -= fmod(rotation_degrees, 90)
-			elif fmod(rotation_degrees, 90) < 0:
-				rotation_degrees += fmod(rotation_degrees, 90)
-			#$Conk.rotation_degrees = 0
-			#$CollisionShape2D.rotation_degrees = 0
-			pass
-		elif fmod(rotation_degrees, 90) < 0 && fmod(rotation, 90) != 0:
-			rotation_degrees -= 2
-			#$CollisionShape2D.rotation_degrees += 2
-		elif fmod(rotation_degrees, 90) > 1 && fmod(rotation, 90) != 0:
-			rotation_degrees += 2
-			#$CollisionShape2D.rotation_degrees -= 2
-	else:
-		#$Conk.rotation_degrees += (velocity.y / 100)
-		#$CollisionShape2D.rotation_degrees += (velocity.y / 100)
+		#print(fmod(rotation_degrees, 90))
+		#if abs(fmod(rotation_degrees, 90)) < 90 && rotation != 0:
+			#rotation_degrees -= (rotation_degrees-fmod(rotation_degrees, 90))
+		#elif abs(fmod(rotation_degrees, 90)) > 90:
+			#rotation_degrees += (rotation_degrees-fmod(rotation_degrees, 90))
+		#if fmod(rotation_degrees, 90) < 45 && fmod(rotation, 90) != 0:
+			#rotation_degrees -= 2
+		#elif fmod(rotation_degrees, 90) > 45 && fmod(rotation, 90) != 0:
+			#rotation_degrees += 2
+	#else:
 		rotation_degrees += (velocity.x / 100)
 	
 	#Spawn lock
