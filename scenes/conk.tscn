@@ -13,6 +13,7 @@ size = Vector2(19, 20)
 position = Vector2(-2.00001, 0.999989)
 scale = Vector2(5.1717, 5.1717)
 script = ExtResource("1_mprh3")
+GRAVITY = 6
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="TextureRect" parent="CharacterBody2D"]

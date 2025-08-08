@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
-var direction = Vector2.ZERO
-var SPEED = 100
+@export var SPEED = 200
+@export var GRAVITY = 4
+
 var SCRAPE_SOUND = preload("res://scrape.mp3")
+var direction = Vector2.ZERO
 var tween = create_tween()
 
 #Used to detect when the character lands
@@ -42,10 +44,10 @@ func moving_sound(move_sound):
 	#if is_on_floor() && was_in_air:
 		#$AudioStreamPlayer2D.play(0.3)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	#Gravity
-	velocity.y += 2
+	velocity.y += GRAVITY
 	
 	if Input.is_action_just_pressed("Up") && is_on_floor():
 		velocity.y = -1 * SPEED
